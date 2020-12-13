@@ -40,7 +40,8 @@ func (s *APIServer) Start() error {
 }
 
 func (s *APIServer) configureRouter()  {
-	s.router.HandleFunc("/hello", s.handleHello())
+	s.router.HandleFunc("/test", s.handleHello())
+	//s.router.HandleFunc("/user", s.handleGetUserByEmail())
 }
 
 func (s *APIServer) configureLogger() error {
@@ -53,7 +54,17 @@ func (s *APIServer) configureLogger() error {
 	return nil
 }
 
+//func (s *APIServer) handleGetUserByEmail() http.HandlerFunc {
+//	s.logger.Info("GET user ")
+//	u, _ := s.store.User().FindByEmail("nbreikin@mail.ru")
+//	return func(w http.ResponseWriter, r *http.Request) {
+//		_, _ = io.WriteString(w, u.Email)
+//	}
+//
+//}
+
 func (s *APIServer) handleHello() http.HandlerFunc {
+	s.logger.Info("GET hello")
 	return func(w http.ResponseWriter, r *http.Request) {
 		_, _ = io.WriteString(w, "Hello")
 	}
